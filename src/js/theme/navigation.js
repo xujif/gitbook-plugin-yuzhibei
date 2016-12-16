@@ -15,7 +15,7 @@ function getScroller() {
     if (platform.isSmallScreen()) {
         return $('.book-body');
     } else {
-        return $('.body-inner');
+        return $('.body-body');
     }
 }
 
