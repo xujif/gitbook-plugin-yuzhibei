@@ -30,6 +30,7 @@ function scrollToHash(hash) {
     if (!pageHasElement(hash)) {
         return;
     }
+    return;
 
     if (hash) {
         dest = getElementTopPosition(hash);
