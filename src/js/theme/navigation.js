@@ -431,11 +431,12 @@ function init() {
     $(window).resize(updateNavigationPosition);
 
     // Prepare current page
-    preparePage(false);
+    //preparePage(false);
+    $('.book-body').animate({ scrollTop: 0 }, 0);
 }
 
 module.exports = {
-    // init: init,
+    init: init,
     goNext: goNext,
     goPrev: goPrev
 };
