@@ -33,13 +33,13 @@ function scrollToHash(hash) {
     return;
 
     if (hash) {
-        dest = getElementTopPosition(hash);
+        dest = 0 // getElementTopPosition(hash);
     }
 
     // Unbind scroll detection
     $scroller.unbind('scroll');
     $scroller.animate({
-        scrollTop: dest
+        scrollTop: 0
     }, 800, 'swing', function() {
         // Reset scroll binding when finished
         $scroller.scroll(handleScrolling);
@@ -62,7 +62,8 @@ function pageHasElement(id) {
 /*
     Return the top position of an element
  */
-function getElementTopPosition(id) {
+function getElementTopPosition
+(id) {
     // Get actual position of element if nested
     var $scroller = getScroller(),
         $container = $scroller.find('.page-inner'),
