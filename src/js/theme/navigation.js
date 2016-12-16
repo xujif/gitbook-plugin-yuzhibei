@@ -432,7 +432,9 @@ function init() {
 
     // Prepare current page
     //preparePage(false);
-    $('.book-body').animate({ scrollTop: 0 }, 0);
+    setTimeout(function() {
+        $('.book-body').animate({ scrollTop: 0 }, 0);
+    }, 50)
 }
 
 module.exports = {
