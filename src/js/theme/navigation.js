@@ -62,8 +62,8 @@ function pageHasElement(id) {
 /*
     Return the top position of an element
  */
-function getElementTopPosition
-(id) {
+function getElementTopPosition(id) {
+    return 0;
     // Get actual position of element if nested
     var $scroller = getScroller(),
         $container = $scroller.find('.page-inner'),
