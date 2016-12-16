@@ -53,8 +53,8 @@ function scrollToHash(hash) {
     Return wether the element exists on the page
  */
 function pageHasElement(id) {
-    var $scroller  = getScroller(),
-        $el        = $scroller.find(id);
+    var $scroller = getScroller(),
+        $el = $scroller.find(id);
 
     return !!$el.length;
 }
@@ -64,11 +64,11 @@ function pageHasElement(id) {
  */
 function getElementTopPosition(id) {
     // Get actual position of element if nested
-    var $scroller  = getScroller(),
+    var $scroller = getScroller(),
         $container = $scroller.find('.page-inner'),
-        $el        = $scroller.find(id),
-        $parent    = $el.offsetParent(),
-        dest       = 0;
+        $el = $scroller.find(id),
+        $parent = $el.offsetParent(),
+        dest = 0;
 
     dest = $el.position().top;
 
@@ -140,19 +140,19 @@ function getChapterHash($chapter) {
     var $link = $chapter.children('a'),
         hash = $link.attr('href').split('#')[1];
 
-    if (hash) hash = '#'+hash;
-    return (!!hash)? hash : '';
+    if (hash) hash = '#' + hash;
+    return (!!hash) ? hash : '';
 }
 
 // Handle user scrolling
 function handleScrolling() {
     // Get current page scroll
-    var $scroller      = getScroller(),
-        scrollTop      = $scroller.scrollTop(),
-        scrollHeight   = $scroller.prop('scrollHeight'),
-        clientHeight   = $scroller.prop('clientHeight'),
-        nbChapters     = $chapters.length,
-        $chapter       = null;
+    var $scroller = getScroller(),
+        scrollTop = $scroller.scrollTop(),
+        scrollHeight = $scroller.prop('scrollHeight'),
+        clientHeight = $scroller.prop('clientHeight'),
+        nbChapters = $chapters.length,
+        $chapter = null;
 
     // Find each title position in reverse order
     $($chapters.get().reverse()).each(function(index) {
@@ -190,6 +190,7 @@ function handleScrolling() {
     Handle a change of url withotu refresh the whole page
 */
 var prevUri = location.href;
+
 function handleNavigation(relativeUrl, push) {
     var prevUriParsed = url.parse(prevUri);
 
@@ -222,7 +223,7 @@ function handleNavigation(relativeUrl, push) {
             type: 'GET',
             url: uri,
             cache: true,
-            headers:{
+            headers: {
                 'Access-Control-Expose-Headers': 'X-Current-Location'
             },
             success: function(html, status, xhr) {
@@ -230,8 +231,8 @@ function handleNavigation(relativeUrl, push) {
                 var responseURL = xhr.getResponseHeader('X-Current-Location') || uri;
 
                 // Replace html content
-                html = html.replace( /<(\/?)(html|head|body)([^>]*)>/ig, function(a,b,c,d){
-                    return '<' + b + 'div' + ( b ? '' : ' data-element="' + c + '"' ) + d + '>';
+                html = html.replace(/<(\/?)(html|head|body)([^>]*)>/ig, function(a, b, c, d) {
+                    return '<' + b + 'div' + (b ? '' : ' data-element="' + c + '"') + d + '>';
                 });
 
                 var $page = $(html),
@@ -300,7 +301,7 @@ function handleNavigation(relativeUrl, push) {
 
     return loading.show(
         promise
-        .fail(function (e) {
+        .fail(function(e) {
             console.log(e); // eslint-disable-line no-console
             // location.href = relativeUrl;
         })
@@ -318,7 +319,7 @@ function updateNavigationPosition() {
     var $scroller = getScroller();
     // Unbind existing scroll event
     $scroller.unbind('scroll');
-    $scroller.scroll(handleScrolling);
+    //$scroller.scroll(handleScrolling);
 }
 
 function preparePage(resetScroll) {
@@ -342,21 +343,20 @@ function preparePage(resetScroll) {
 
     // Get current page summary chapters
     $chapters = $('.book-summary .summary .chapter')
-    .filter(function() {
-        var $link = $(this).children('a'),
-            href  = null;
+        .filter(function() {
+            var $link = $(this).children('a'),
+                href = null;
 
-        // Chapter doesn't have a link
-        if (!$link.length) {
-            return false;
-        }
-        else {
-            href = $link.attr('href').split('#')[0];
-        }
+            // Chapter doesn't have a link
+            if (!$link.length) {
+                return false;
+            } else {
+                href = $link.attr('href').split('#')[0];
+            }
 
-        var resolvedRef = url.resolve(window.location.pathname, href);
-        return window.location.pathname == resolvedRef;
-    });
+            var resolvedRef = url.resolve(window.location.pathname, href);
+            return window.location.pathname == resolvedRef;
+        });
 
     // Bind scrolling if summary contains more than one link to this page
     if ($chapters.length > 1) {
@@ -416,7 +416,7 @@ function init() {
     history.replaceState({ path: window.location.href }, '');
 
     // Back Button Hijacking :(
-    window.onpopstate = function (event) {
+    window.onpopstate = function(event) {
         if (event.state === null) {
             return;
         }
